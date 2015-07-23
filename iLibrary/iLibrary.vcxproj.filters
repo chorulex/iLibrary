@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="book">
+      <UniqueIdentifier>{39d80ef4-61d7-4fb6-80a0-5f2eef5c9d1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="library">
+      <UniqueIdentifier>{0c9de1d3-5ee3-48bd-8c1a-f4411cf282c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="server">
+      <UniqueIdentifier>{9e477d3f-0708-4b39-92f0-b54d73816079}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\book\book.h">
+      <Filter>book</Filter>
+    </ClInclude>
+    <ClInclude Include="..\book\detail.h">
+      <Filter>book</Filter>
+    </ClInclude>
+    <ClInclude Include="..\book\package.h">
+      <Filter>book</Filter>
+    </ClInclude>
+    <ClInclude Include="..\library\library.h">
+      <Filter>library</Filter>
+    </ClInclude>
+    <ClInclude Include="..\library\option.h">
+      <Filter>library</Filter>
+    </ClInclude>
+    <ClInclude Include="..\server\general.h">
+      <Filter>server</Filter>
+    </ClInclude>
+    <ClInclude Include="..\server\server.h">
+      <Filter>server</Filter>
+    </ClInclude>
+    <ClInclude Include="..\server\store.h">
+      <Filter>server</Filter>
+    </ClInclude>
+    <ClInclude Include="..\enumerator.h" />
+    <ClInclude Include="..\printor.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\main.cpp" />
+    <ClCompile Include="..\server\store.cpp">
+      <Filter>server</Filter>
+    </ClCompile>
+    <ClCompile Include="..\server\general.cpp">
+      <Filter>server</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\readme.txt" />
+  </ItemGroup>
+</Project>
