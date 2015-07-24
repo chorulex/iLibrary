@@ -10,6 +10,12 @@
     <Filter Include="server">
       <UniqueIdentifier>{9e477d3f-0708-4b39-92f0-b54d73816079}</UniqueIdentifier>
     </Filter>
+    <Filter Include="test">
+      <UniqueIdentifier>{592282cd-1e04-489c-af6e-aa7e09f9829d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view">
+      <UniqueIdentifier>{e2630539-0822-4516-884f-1c3a880621c9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\book\book.h">
@@ -38,6 +44,15 @@
     </ClInclude>
     <ClInclude Include="..\enumerator.h" />
     <ClInclude Include="..\printor.h" />
+    <ClInclude Include="..\test\console_test.h">
+      <Filter>test</Filter>
+    </ClInclude>
+    <ClInclude Include="..\view\manager.h">
+      <Filter>view</Filter>
+    </ClInclude>
+    <ClInclude Include="..\test\gui_test.h">
+      <Filter>test</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\main.cpp" />
