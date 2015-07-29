@@ -31,10 +31,10 @@ namespace iLibrary
     std::vector<comment> _comments;
 
   public:
-    cip get_cip() { return _cip; }
-    purchase get_purchase() { return _purchase; }
-    state get_state() { return _state; }
-    std::vector<comment> get_comment() { return _comments; }
+    cip get_cip() const { return _cip; }
+    purchase get_purchase() const { return _purchase; }
+    state get_state() const { return _state; }
+    std::vector<comment> get_comment() const { return _comments; }
 
     void set_cip(const cip& src) { _cip = src; }
     void set_purchase(const purchase& src) { _purchase = src; }

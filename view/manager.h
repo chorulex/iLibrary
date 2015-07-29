@@ -7,11 +7,11 @@
 #ifndef _VIEW_MANAGER_H_
 #define _VIEW_MANAGER_H_
 
-#include <nana/gui.hpp>
+//#include <nana/gui.hpp>
 
 namespace iLibrary
 {
-	class manager_view : public nana::form
+	class manager_view //: public nana::form
 	{
 
 	};

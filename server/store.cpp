@@ -10,23 +10,40 @@ namespace iLibrary
 {
 	bool store::initialize()
 	{
-		return true;
+		return _book_table.initialize() && 
+			_cip_table.initialize() && 
+			_comment_table.initialize() && 
+			_publish_table.initialize() && 
+			_purchase_table.initialize() &&
+			_state_table.initialize();
+
 	}
 
 	void store::destroy()
 	{
-
+		_state_table.destroy();
+		_purchase_table.destroy();
+		_publish_table.destroy();
+		_comment_table.destroy();
+		_cip_table.destroy();
+		_book_table.destroy();
 	}
 
 	/* 添加一本书 */
 	bool store::add(const book& item)
 	{
-		return true;
+		return _book_table.add(item);
 	}
 
 	/* 添加多本书 */
-	bool store::add(const package& set)
+	bool store::add( package& set)
 	{
+		while( set.has_more() )
+		{ 
+			if (!add(set.next()))
+				return false;
+		}
+
 		return true;
 	}
 

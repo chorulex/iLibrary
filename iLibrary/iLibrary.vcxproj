@@ -91,14 +91,23 @@
     <ClInclude Include="..\server\general.h" />
     <ClInclude Include="..\server\server.h" />
     <ClInclude Include="..\server\store.h" />
+    <ClInclude Include="..\table\table.h" />
+    <ClInclude Include="..\table\table_book.h" />
+    <ClInclude Include="..\table\table_general.h" />
     <ClInclude Include="..\test\console_test.h" />
     <ClInclude Include="..\test\gui_test.h" />
     <ClInclude Include="..\view\manager.h" />
+    <ClInclude Include="..\xml\tinystr.h" />
+    <ClInclude Include="..\xml\tinyxml.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\main.cpp" />
     <ClCompile Include="..\server\general.cpp" />
     <ClCompile Include="..\server\store.cpp" />
+    <ClCompile Include="..\xml\tinystr.cpp" />
+    <ClCompile Include="..\xml\tinyxml.cpp" />
+    <ClCompile Include="..\xml\tinyxmlerror.cpp" />
+    <ClCompile Include="..\xml\tinyxmlparser.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\readme.txt" />

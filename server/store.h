@@ -8,7 +8,11 @@
 #define _BOOK_STORE_H_
 
 #include "../book/package.h"
+#include "../table/table.h"
+#include "../table/table_book.h"
+
 #include "server.h"
+
 
 namespace iLibrary
 {
@@ -17,6 +21,13 @@ namespace iLibrary
 	public:
 
 	private:
+		table_book _book_table;
+		table_cip _cip_table;
+		table_comment _comment_table;
+		table_publish _publish_table;
+		table_purchase _purchase_table;
+		table_state _state_table;
+
 	protected:
 
 	public:
@@ -27,7 +38,7 @@ namespace iLibrary
 		virtual bool add(const book& item);
 
 		/* 添加多本书 */
-		virtual bool add(const package& set);
+		virtual bool add( package& set);
 
 		/* 根据书名移除书籍，可能删除多本同名的书籍 */
 		virtual bool remove(const std::string& title);
@@ -82,11 +93,11 @@ namespace iLibrary
 			return true;
 		}
 
-		bool add(const package& pkg) override
+		bool add( package& pkg) override
 		{
 			while (pkg.has_more())
 			{
-				add(_books.next());
+				add(pkg.next());
 			}
 
 			return true;

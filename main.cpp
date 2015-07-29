@@ -4,7 +4,8 @@
 
 int main()
 {
-	//return iLibrary::console_test::main();
+	iLibrary::console_test _test;
+	return _test.main();
 
-	return iLibrary::gui_test::main();
+	// return iLibrary::gui_test::main();
 }

@@ -15,7 +15,7 @@
    class option : public printor
    {
    public:
-     int count;         // 书籍数目
+	   int count{0};         // 书籍数目
      std::string name;  // 书库名称
 
 	 void print() override

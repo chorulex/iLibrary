@@ -14,8 +14,8 @@ namespace iLibrary
   class library
   {
   private:
-    genaral_fake _srv_genaral;
-    store_fake _srv_store;
+    genaral _srv_genaral;
+    store _srv_store;
 
   protected:
 

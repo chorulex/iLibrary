@@ -15,10 +15,13 @@ namespace iLibrary
 	{
 		int main()
 		{
+			// TODO:Use QT GUI LIB
+			/*
 			iLibrary::manager_view _fream;
 			_fream.show();
 
 			nana::exec();
+			*/
 
 			return 0;
 		}

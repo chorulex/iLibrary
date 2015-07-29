@@ -5,6 +5,7 @@
  */
 
 #include "../library/option.h"
+#include "../table/table_general.h"
 #include "server.h"
 
 namespace iLibrary
@@ -17,6 +18,7 @@ namespace iLibrary
 	private:
 
 	protected:
+		table_general _general_table;
 
 	public:
 		virtual bool initialize() override;
@@ -28,6 +30,7 @@ namespace iLibrary
 		virtual bool update_books_count(int count);
 	};
 
+	/* Only for unit test */
 	class genaral_fake : public genaral
 	{
 	protected:

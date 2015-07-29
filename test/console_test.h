@@ -11,32 +11,87 @@
 
 namespace iLibrary
 {
-	namespace console_test
+	class console_test
 	{
-		int main()
+	private:
+		iLibrary::library _lib;
+
+	private:
+		void test_initialize()
 		{
-			iLibrary::library lib;
-			if (!lib.initialize())
+			if (!_lib.initialize())
 			{
 				std::cout << "Faid to init library!" << std::endl;
-				return 0;
+			}
+		}
+
+		void test_destroy()
+		{
+			_lib.destroy();
+		}
+
+		void test_genaral_acquire()
+		{
+			iLibrary::option& opt = _lib.get_srv_genaral().acquire();
+			opt.print();
+		}
+
+		void test_genaral_update()
+		{
+			option opt;
+			opt.count = 1;
+			opt.name = "Library of Chorulex";
+			if (!_lib.get_srv_genaral().update(opt))
+			{
+				std::cout << "Faid to update library option!" << std::endl;
 			}
 
-			iLibrary::option& opt = lib.get_srv_genaral().acquire();
-			opt.print();
+		}
 
-			iLibrary::store& srv_store = lib.get_srv_store();
+		void test_store_add()
+		{
+			package books;
+			books.add(book(cip(92, "C++ primer", "Chorulex", isbn("adf_123_3q341234"), publish(4, true, "Alesxhiagic Press")), purchase(78, 5412, "Amazon.cn")));
+			books.add(book(cip(65, "C++ Inside", "Chorulex.C.sexet", isbn("45f_dfg_3qasdfs4"), publish(1, true, "Alesxhiagic Press")), purchase(45, 2542, "Taobao.com")));
+
+			if (!_lib.get_srv_store().add(books))
+			{
+				std::cout << "Faid to add book!" << std::endl;
+			}
+		}
+
+		void test_store_query()
+		{
+			iLibrary::store& srv_store = _lib.get_srv_store();
 			iLibrary::package& books = srv_store.query();
 			books.print();
+		}
 
-			books = srv_store.query_over(true);
+		void test_store_query_over()
+		{
+			iLibrary::store& srv_store = _lib.get_srv_store();
+			iLibrary::package& books = srv_store.query_over(true);
 			if (books.count() == 0)
 				std::cout << "No over_readed books!" << std::endl;
 			else
 				books.print();
+		}
 
-			lib.destroy();
+	public:
+		int main()
+		{
+			test_initialize();
 
+			/*
+			test_genaral_acquire();
+
+			test_genaral_update();
+			test_genaral_acquire();
+			*/
+
+			test_store_add();
+
+			test_destroy();
 			return 0;
 		}
 	};
