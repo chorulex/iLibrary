@@ -1,1 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<cips>
+    <cip isbn="adf_123_3q341234">
+        <price>92</price>
+        <title>C++ primer</title>
+        <author>Chorulex</author>
+    </cip>
+    <cip isbn="45f_dfg_3qasdfs4">
+        <price>65</price>
+        <title>C++ Inside</title>
+        <author>Chorulex.C.sexet</author>
+    </cip>
+</cips>

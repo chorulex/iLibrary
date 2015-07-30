@@ -14,7 +14,7 @@
 #include "../book/detail.h"
 #include "../xml/tinyxml.h"
 
-#include "table.h"
+#include "table_base.h"
 
 namespace iLibrary
 {
@@ -37,7 +37,7 @@ namespace iLibrary
 				opt.name = "Library of Chorulex";
 
 				TiXmlNode* node = new TiXmlElement("general");
-				
+
 				TiXmlNode* count = new TiXmlElement("count");
 				count->InsertEndChild(TiXmlText("0"));
 				node->LinkEndChild(count);
@@ -52,17 +52,12 @@ namespace iLibrary
 			else
 			{
 				TiXmlElement* node = root->FirstChildElement("count");
-				if (node != nullptr)
-				{
+				if (node != nullptr && !node->NoChildren())
 					opt.count = atoi(node->FirstChild()->Value());
-				}
 
 				node = root->FirstChildElement("name");
-				if (node != nullptr)
-				{
-					if( !node->NoChildren() )
-						opt.name = node->FirstChild()->Value();
-				}
+				if (node != nullptr && !node->NoChildren())
+					opt.name = node->FirstChild()->Value();
 			}
 
 			return opt;
@@ -82,7 +77,7 @@ namespace iLibrary
 			TiXmlElement* name_node = root->FirstChildElement("name");
 			if (name_node == nullptr)
 				return false;
-			
+
 			if (name_node->NoChildren())
 				name_node->InsertEndChild(TiXmlText(name.c_str()));
 			else
@@ -106,7 +101,7 @@ namespace iLibrary
 			if (count_node->NoChildren())
 				count_node->InsertEndChild(TiXmlText(count_str.str().c_str()));
 			else
-				count_node->FirstChild()->SetValue(count_str.str().c_str());			
+				count_node->FirstChild()->SetValue(count_str.str().c_str());
 			return true;
 		}
 	};

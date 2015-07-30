@@ -1,1 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<publishs>
+    <publish isbn="adf_123_3q341234">
+        <version>4</version>
+        <translated>true</translated>
+        <datetime>40</datetime>
+        <company>Alesxhiagic Press</company>
+    </publish>
+    <publish isbn="45f_dfg_3qasdfs4">
+        <version>1</version>
+        <translated>true</translated>
+        <datetime>10</datetime>
+        <company>Alesxhiagic Press</company>
+    </publish>
+</publishs>

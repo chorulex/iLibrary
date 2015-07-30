@@ -8,7 +8,6 @@
 #define _BOOK_STORE_H_
 
 #include "../book/package.h"
-#include "../table/table.h"
 #include "../table/table_book.h"
 
 #include "server.h"
@@ -22,11 +21,6 @@ namespace iLibrary
 
 	private:
 		table_book _book_table;
-		table_cip _cip_table;
-		table_comment _comment_table;
-		table_publish _publish_table;
-		table_purchase _purchase_table;
-		table_state _state_table;
 
 	protected:
 
@@ -75,7 +69,7 @@ namespace iLibrary
 
 	public:
 		bool initialize() override
-		{ 
+		{
 			_books.add(book(cip(92, "C++ primer", "Chorulex", isbn("adf_123_3q341234"), publish(4, true, "人民邮电出版社")), purchase(78, 5412, "亚马逊")));
 			_books.add(book(cip(65, "C++ 沉思录", "Chorulex.C.sexet", isbn("45f_dfg_3qasdfs4"), publish(1, true, "人民邮电出版社")), purchase(45, 2542, "淘宝网")));
 

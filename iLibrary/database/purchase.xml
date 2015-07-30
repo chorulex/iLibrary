@@ -1,1 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<purchases>
+    <purchase isbn="adf_123_3q341234">
+        <seller>Amazon.cn</seller>
+        <charge>78</charge>
+        <date>785412</date>
+    </purchase>
+    <purchase isbn="45f_dfg_3qasdfs4">
+        <seller>Taobao.com</seller>
+        <charge>45</charge>
+        <date>452542</date>
+    </purchase>
+</purchases>

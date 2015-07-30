@@ -16,7 +16,7 @@ namespace iLibrary
   class book
   {
   public:
-	book() {}
+	  book() {}
 
     /* 无阅读记录 */
     book(const cip& base, const purchase& buy) : _cip(base), _purchase(buy) {}
@@ -34,11 +34,17 @@ namespace iLibrary
     cip get_cip() const { return _cip; }
     purchase get_purchase() const { return _purchase; }
     state get_state() const { return _state; }
-    std::vector<comment> get_comment() const { return _comments; }
+    std::vector<comment> get_comments() const { return _comments; }
+
+	  isbn get_isbn() const { return _cip.id;  }
+	  void set_isbn(const char* id) { _cip.id.value = id; }
+	  void set_isbn(const std::string& id) { _cip.id.value = id; }
+	  void set_isbn(const isbn& id) { _cip.id = id;  }
 
     void set_cip(const cip& src) { _cip = src; }
     void set_purchase(const purchase& src) { _purchase = src; }
     void set_state(const state& src) { _state = src; }
+    void set_comments(const vector<comment>& src) { _comments = src; }
 
     void add_comment(const comment& item) { _comments.push_back(item); }
 

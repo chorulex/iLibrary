@@ -64,7 +64,15 @@ namespace iLibrary
 		{
 			iLibrary::store& srv_store = _lib.get_srv_store();
 			iLibrary::package& books = srv_store.query();
-			books.print();
+
+			if (books.count() == 0)
+			{
+				std::cout << "None book!" << std::endl;
+			}
+			else
+			{
+				books.print();
+			}
 		}
 
 		void test_store_query_over()
@@ -89,7 +97,9 @@ namespace iLibrary
 			test_genaral_acquire();
 			*/
 
-			test_store_add();
+			//test_store_add();
+			//test_store_query();
+			test_store_query_over();
 
 			test_destroy();
 			return 0;

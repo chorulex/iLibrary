@@ -10,22 +10,11 @@ namespace iLibrary
 {
 	bool store::initialize()
 	{
-		return _book_table.initialize() && 
-			_cip_table.initialize() && 
-			_comment_table.initialize() && 
-			_publish_table.initialize() && 
-			_purchase_table.initialize() &&
-			_state_table.initialize();
-
+		return _book_table.initialize();
 	}
 
 	void store::destroy()
 	{
-		_state_table.destroy();
-		_purchase_table.destroy();
-		_publish_table.destroy();
-		_comment_table.destroy();
-		_cip_table.destroy();
 		_book_table.destroy();
 	}
 
@@ -39,7 +28,7 @@ namespace iLibrary
 	bool store::add( package& set)
 	{
 		while( set.has_more() )
-		{ 
+		{
 			if (!add(set.next()))
 				return false;
 		}
@@ -73,10 +62,16 @@ namespace iLibrary
 		return true;
 	}
 
+	/* 查询所有书籍 */
+	package store::query()
+	{
+		return _book_table.query();
+	}
+
 	/* 根据isbn查询书籍 */
 	book store::query(const isbn& id) noexcept(false)
 	{
-		return book();
+		return _book_table.query(id);
 	}
 
 	/* 根据书名查询书籍 */
@@ -88,7 +83,7 @@ namespace iLibrary
 	/* 根据是否阅读完成状态查询书籍，有可能查询出多本书籍 */
 	package store::query_over(bool over)
 	{
-		return package();
+		return _book_table.query_over(over);
 	}
 
 	/* 根据在库状态查询书籍，有可能查询出多本书籍 */
@@ -97,9 +92,4 @@ namespace iLibrary
 		return package();
 	}
 
-	/* 查询所有书籍 */
-	package store::query()
-	{
-		return package();
-	}
 };

@@ -59,9 +59,6 @@
     <ClInclude Include="..\test\gui_test.h">
       <Filter>test</Filter>
     </ClInclude>
-    <ClInclude Include="..\table\table.h">
-      <Filter>table</Filter>
-    </ClInclude>
     <ClInclude Include="..\xml\tinystr.h">
       <Filter>xml</Filter>
     </ClInclude>
@@ -72,6 +69,24 @@
       <Filter>table</Filter>
     </ClInclude>
     <ClInclude Include="..\table\table_book.h">
+      <Filter>table</Filter>
+    </ClInclude>
+    <ClInclude Include="..\table\table_base.h">
+      <Filter>table</Filter>
+    </ClInclude>
+    <ClInclude Include="..\table\table_comment.h">
+      <Filter>table</Filter>
+    </ClInclude>
+    <ClInclude Include="..\table\table_purchase.h">
+      <Filter>table</Filter>
+    </ClInclude>
+    <ClInclude Include="..\table\table_state.h">
+      <Filter>table</Filter>
+    </ClInclude>
+    <ClInclude Include="..\table\table_cip.h">
+      <Filter>table</Filter>
+    </ClInclude>
+    <ClInclude Include="..\table\table_publish.h">
       <Filter>table</Filter>
     </ClInclude>
   </ItemGroup>
