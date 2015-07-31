@@ -47,37 +47,47 @@ namespace iLibrary
 	{
 		return true;
 	}
-
-	/* bool modify(isbn id, const book& item); // cip数据事后似乎不能修改 */
-
-	/* 根据isbn修改阅读状态 */
-	bool store::modify(const isbn& id, const state& stat)
-	{
-		return true;
-	}
-
+	
 	/* 根据isbn修改书籍评论 */
-	bool store::modify(const isbn& id, const comment& comm)
+	bool store::add_comment(const isbn& id, const comment& comm)
 	{
 		return true;
 	}
 
 	/* 查询所有书籍 */
-	package store::query()
+	package store::query_all()
 	{
-		return _book_table.query();
+		return _book_table.query_all();
 	}
 
 	/* 根据isbn查询书籍 */
-	book store::query(const isbn& id) noexcept(false)
+	book store::query_isbn(const isbn& id) noexcept(false)
 	{
-		return _book_table.query(id);
+		return _book_table.query_isbn(id);
 	}
 
 	/* 根据书名查询书籍 */
-	package store::query(const std::string& title)
+	package store::query_title(const std::string& title)
 	{
-		return package();
+		return _book_table.query_title(title);
+	}
+
+	/* 根据作者查询书籍 */
+	package store::query_author(const std::string& author)
+	{
+		return _book_table.query_author(author);
+	}
+
+	/* 根据出版社查询书籍 */
+	package store::query_publisher(const std::string& publisher)
+	{
+		return _book_table.query_publisher(publisher);
+	}
+
+	/* 查询是否翻译书籍 */
+	package store::query_translated(bool translated)
+	{
+		return _book_table.query_translated(translated);
 	}
 
 	/* 根据是否阅读完成状态查询书籍，有可能查询出多本书籍 */
@@ -89,7 +99,30 @@ namespace iLibrary
 	/* 根据在库状态查询书籍，有可能查询出多本书籍 */
 	package store::query_in_store(bool in_store)
 	{
-		return package();
+		return _book_table.query_in_store(in_store);
 	}
 
+	/* 修改已读状态 */
+	bool store::update_over(const isbn& id, bool over)
+	{
+		return _book_table.update_over(id, over);
+	}
+
+	/* 修改在库状态 */
+	bool store::update_in_store(const isbn& id, bool in_store)
+	{
+		return _book_table.update_in_store(id, in_store);
+	}
+
+	/* 修改已阅读页数 */
+	bool store::updata_current_page_read(const isbn& id, int page)
+	{
+		return _book_table.updata_current_page_read(id, page);
+	}
+
+	/* 修改阅读状态 */
+	bool store::update_state(const isbn& id, const state& stat)
+	{
+		return _book_table.update_state(id, stat);
+	}
 };

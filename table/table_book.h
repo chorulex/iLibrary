@@ -84,6 +84,161 @@ namespace iLibrary
 
 			return true;
 		}
+		
+		package query_all()
+		{
+			package result;
+
+			TiXmlElement* root = _doc->RootElement();
+			if (root == nullptr)
+				return result;
+
+			for (TiXmlElement* elem = root->FirstChildElement("book"); elem != nullptr; elem = elem->NextSiblingElement())
+			{
+				TiXmlAttribute* opt = elem->FirstAttribute();
+				if (opt == nullptr || opt->Value() == nullptr)
+					continue;
+
+				book single;
+				single.set_isbn(opt->Value());
+
+				result.add(single);
+			}
+
+			while (result.has_more())
+			{
+				book& item = result.next();
+				item = query_isbn(item.get_isbn());
+			}
+			return result;
+		}
+
+		book query_isbn(const isbn& id)
+		{
+			book result;
+
+			result.set_cip(_cip_table.query_isbn(id));
+			result.set_purchase(_purchase_table.query_isbn(id));
+			result.set_state(_state_table.query_isbn(id));
+			result.set_comments(_comment_table.query_isbn(id));
+
+			return result;
+		}
+
+		package query_title(const std::string& title)
+		{
+			package result;
+			std::vector<isbn>& book_ids = _cip_table.query_title(title);
+
+			for (auto iter = begin(book_ids); iter != end(book_ids); ++iter)
+			{
+				book item = query_isbn(*iter);
+				if (!item.get_isbn().value.empty())
+					result.add(item);
+			}
+
+			return result;
+		}
+
+		package query_author(const std::string& author)
+		{
+			package result;
+			std::vector<isbn>& book_ids = _cip_table.query_author(author);
+
+			for (auto iter = begin(book_ids); iter != end(book_ids); ++iter)
+			{
+				book item = query_isbn(*iter);
+				if (!item.get_isbn().value.empty())
+					result.add(item);
+			}
+
+			return result;
+		}
+
+		package query_publisher(const std::string& publisher)
+		{
+			package result;
+			std::vector<isbn>& book_ids = _cip_table.query_publisher(publisher);
+
+			for (auto iter = begin(book_ids); iter != end(book_ids); ++iter)
+			{
+				book item = query_isbn(*iter);
+				if (!item.get_isbn().value.empty())
+					result.add(item);
+			}
+
+			return result;
+		}		
+
+		package query_translated(bool translated)
+		{
+			package result;
+			std::vector<isbn>& book_ids = _cip_table.query_translated(translated);
+
+			for (auto iter = begin(book_ids); iter != end(book_ids); ++iter)
+			{
+				book item = query_isbn(*iter);
+				if (!item.get_isbn().value.empty())
+					result.add(item);
+			}
+
+			return result;
+		}
+
+		package query_over(bool over)
+		{
+			package result;
+			std::vector<isbn>& book_ids =  _state_table.query_over(over) ;
+			
+			for (auto iter = begin(book_ids); iter != end(book_ids); ++iter)
+			{
+				book item = query_isbn(*iter);
+				if (!item.get_isbn().value.empty())
+					result.add(item);
+			}
+
+			return result;
+		}
+
+		package query_in_store(bool in_store)
+		{
+			package result;
+			std::vector<isbn>& book_ids = _state_table.query_in_store(in_store);
+
+			for (auto iter = begin(book_ids); iter != end(book_ids); ++iter)
+			{
+				book item = query_isbn(*iter);
+				if (!item.get_isbn().value.empty())
+					result.add(item);
+			}
+
+			return result;
+		}
+
+		bool update_state(const isbn& id, const state& stat)
+		{
+			return _state_table.update(id, stat);
+		}
+
+		bool updata_current_page_read(const isbn& book_id, int page)
+		{
+			return _state_table.updata_current_page_read(book_id, page);
+		}
+
+		bool update_in_store(const isbn& id, bool in_store)
+		{
+			return _state_table.updata_in_store(id, in_store);
+		}
+
+		bool update_over(const isbn& id, bool over)
+		{
+			return _state_table.updata_over(id, over);
+		}
+
+		bool update(const isbn& id, const comment& comm)
+		{
+			return true;
+		}
 
 		bool remove(const std::string& title)
 		{
@@ -93,79 +248,6 @@ namespace iLibrary
 		bool remove(const isbn& id)
 		{
 			return true;
-		}
-
-		bool modify(const isbn& id, const state& stat)
-		{
-			return true;
-		}
-
-		bool modify(const isbn& id, const comment& comm)
-		{
-			return true;
-		}
-
-		book query(const isbn& id) noexcept(false)
-		{
-			book result;
-
-			result.set_cip(_cip_table.query(id));
-			result.set_purchase(_purchase_table.query(id));
-			result.set_state(_state_table.query(id));
-			result.set_comments(_comment_table.query(id));
-
-			return result;
-		}
-
-		package query(const std::string& title)
-		{
-			return package();
-		}
-
-		package query_over(bool over)
-		{
-			return package();
-		}
-
-		package query_in_store(bool in_store)
-		{
-			return package();
-		}
-
-		package query()
-		{
-			package result;
-
-			TiXmlElement* elem = _doc->FirstChildElement("book");
-			for( ; elem != nullptr; elem = elem->NextSiblingElement())
-			{
-				TiXmlAttribute* opt = elem->FirstAttribute();
-				if( opt == nullptr )
-					continue;
-
-				book single;
-				single.set
-
-				state result;
-
-				TiXmlElement* item = elem->FirstChildElement("over");
-				if (item != nullptr && !item->NoChildren())
-					result.over = item->FirstChild()->Value() == "true";
-
-				item = elem->FirstChildElement("in_store");
-				if (item != nullptr && !item->NoChildren())
-					result.in_store = item->FirstChild()->Value() == "true";
-
-				item = elem->FirstChildElement("page");
-				if (item != nullptr && !item->NoChildren())
-					result.page = atoi(item->FirstChild()->Value());
-
-				item = elem->FirstChildElement("current");
-				if (item != nullptr && !item->NoChildren())
-					result.current = atoi(item->FirstChild()->Value());
-
-				return result;
-			return package();
 		}
 	};
 }

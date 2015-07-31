@@ -87,6 +87,82 @@ namespace iLibrary
 			return result;
 		}
 
+		bool update_section(TiXmlElement* table_node, TiXmlElement* section_node, const std::string& section, const std::string& value)
+		{
+			if (table_node == nullptr)
+				return false;
+
+			if (section_node == nullptr)
+			{
+				TiXmlElement new_section(section.c_str());
+				new_section.InsertEndChild(TiXmlText(value.c_str()));
+				table_node->InsertEndChild(new_section);
+			}
+			else
+			{
+				if (section_node->NoChildren())
+				{
+					section_node->InsertEndChild(TiXmlText(value.c_str()));
+				}
+				else
+				{
+					section_node->FirstChild()->SetValue(value.c_str());
+				}
+			}
+
+			return true;
+		}
+
+		bool update_section(const std::string& table, const std::string& section, const std::string& value)
+		{
+			std::vector<isbn> result;
+
+			TiXmlElement* root = _doc->RootElement();
+			if (root == nullptr)
+				return false;
+
+			TiXmlElement* elem = nullptr;
+			if( table.compare(root->Value()) == 0)
+				elem = _doc->FirstChildElement(table.c_str());
+			else
+				elem = root->FirstChildElement(table.c_str());
+
+			for (; elem != nullptr; elem = elem->NextSiblingElement())
+			{
+				TiXmlElement* item = elem->FirstChildElement(section.c_str());
+
+				if (!update_section(elem, item, section, value))
+					return false;
+			}
+
+			return true;
+		}
+
+		bool update_section(const isbn& book_id, const std::string& table, const std::string& section, const std::string& value)
+		{
+			std::vector<isbn> result;
+
+			TiXmlElement* root = _doc->RootElement();
+			if (root == nullptr)
+				return false;
+
+			for (TiXmlElement* elem = root->FirstChildElement(table.c_str()); elem != nullptr; elem = elem->NextSiblingElement())
+			{
+				TiXmlAttribute* opt = elem->FirstAttribute();
+				if (opt == nullptr || opt->Value() == nullptr)
+					continue;
+
+				const std::string id(opt->Value());
+				if (id.compare(book_id.value) == 0)
+				{
+					TiXmlElement* item = elem->FirstChildElement(section.c_str());
+					return update_section(elem, item, section, value);
+				}
+			}
+
+			return false;
+		}
+
 	public:
 		bool initialize()
 		{

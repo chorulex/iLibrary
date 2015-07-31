@@ -61,7 +61,7 @@ namespace iLibrary
 			return true;
 		}
 
-		state query(const isbn& book_id)
+		state query_isbn(const isbn& book_id)
 		{
 			state result;
 
@@ -76,14 +76,14 @@ namespace iLibrary
 					continue;
 				if( opt->Value() != book_id.value )
 					continue;
-				
+
 				TiXmlElement* item = elem->FirstChildElement("over");
 				if (item != nullptr && !item->NoChildren())
-					result.over = item->FirstChild()->Value() == "true";
+					result.over = std::string("true").compare(item->FirstChild()->Value()) == 0;
 
 				item = elem->FirstChildElement("in_store");
 				if (item != nullptr && !item->NoChildren())
-					result.in_store = item->FirstChild()->Value() == "true";
+					result.in_store = std::string("true").compare(item->FirstChild()->Value()) == 0;
 
 				item = elem->FirstChildElement("page");
 				if (item != nullptr && !item->NoChildren())
@@ -99,14 +99,37 @@ namespace iLibrary
 			return result;
 		}
 
-		std::vector<isbn> query_over()
+		std::vector<isbn> query_over(bool over)
 		{
-			return query_section("state", "over", "true");
+			return query_section("state", "over", over ? "true" : "false");
 		}
 
-		std::vector<isbn> query_not_over()
+		std::vector<isbn> query_in_store(bool in_store)
 		{
-			return query_section("state", "over", "false");
+			return query_section("state", "in_store", in_store ? "true" : "false");
+		}
+
+		bool updata_over(const isbn& book_id, bool over)
+		{
+			return update_section(book_id, "state", "over", over ? "true" : "false");
+		}
+
+		bool updata_in_store(const isbn& book_id, bool in_store)
+		{
+			return update_section(book_id, "state", "in_store", in_store ? "true" : "false");
+		}
+
+		bool updata_current_page_read(const isbn& book_id, int page)
+		{
+			std::stringstream value;
+			value << page;
+
+			return update_section(book_id, "state", "current", value.str());
+		}
+
+		bool update(const isbn& book_id, const state& stat)
+		{
+			return updata_over(book_id, stat.over) && updata_in_store(book_id, stat.in_store) && updata_current_page_read(book_id, stat.current);
 		}
 	};
 }

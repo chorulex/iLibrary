@@ -30,11 +30,11 @@
 
    bool genaral::update_store_name(const std::string& name)
    {
-	   return _general_table.update(name);
+	   return _general_table.update_name(name);
    }
 
    bool genaral::update_books_count(int count)
    {
-	   return _general_table.update(count);
+	   return _general_table.update_count(count);
    }
  };

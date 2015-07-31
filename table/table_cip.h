@@ -64,7 +64,7 @@ namespace iLibrary
 			return true;
 		}
 
-		cip query(const isbn& book_id)
+		cip query_isbn(const isbn& book_id)
 		{
 			cip result;
 
@@ -96,11 +96,31 @@ namespace iLibrary
 				if (item != nullptr && !item->NoChildren())
 					result.author = item->FirstChild()->Value();
 
-				result.press = _publish_table.query(book_id);
+				result.press = _publish_table.query_isbn(book_id);
 				return result;
 			}
 
 			return result;
+		}
+
+		std::vector<isbn> query_title(const std::string& title)
+		{
+			return query_section("cip", "title", title);
+		}
+
+		std::vector<isbn> query_author(const std::string& author)
+		{
+			return query_section("cip", "author", author);
+		}
+
+		std::vector<isbn> query_publisher(const std::string& publisher)
+		{
+			return _publish_table.query_publisher(publisher);
+		}
+
+		std::vector<isbn> query_translated(bool translated)
+		{
+			return translated ? _publish_table.query_translated() : _publish_table.query_not_translated();
 		}
 	};
 }

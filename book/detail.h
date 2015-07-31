@@ -41,7 +41,11 @@ namespace iLibrary
 
 		void print() override
 		{
-			std::cout << "Publish: " << "version:" << version << " translated:" << translated << " datetime:" << datetime << " company:" << company << std::endl;
+			std::cout << "Publish: " << "version:" << version
+			<< " translated:" << (translated ? "true" : "false")
+			<< " datetime:" << datetime
+			<< " company:" << company
+			<< std::endl;
 		}
 	};
 
@@ -61,7 +65,8 @@ namespace iLibrary
 
 		void print() override
 		{
-			std::cout << "CIP: " << "title:[" << title << "] price:" << price << " author:" << author << std::endl;
+			std::cout << "title:" << title << std::endl;
+			std::cout << "CIP: " << "price:" << price << " author:" << author << std::endl;
 
 			id.print();
 			press.print();
@@ -110,7 +115,11 @@ namespace iLibrary
 
 		void print() override
 		{
-			std::cout << "State: "<< "over:" << over << " in_store:" << in_store << " page:" << page << " current:" << current << std::endl;
+			std::cout << "State: "<< "over:" << (over ? "true" : "false")
+				<< " in_store:" << (in_store ? "true" : "false")
+				<< " page:" << page
+				<< " current:" << current
+				<< std::endl;
 		}
 	};
 };

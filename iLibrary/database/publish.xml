@@ -2,7 +2,7 @@
 <publishs>
     <publish isbn="adf_123_3q341234">
         <version>4</version>
-        <translated>true</translated>
+        <translated>false</translated>
         <datetime>40</datetime>
         <company>Alesxhiagic Press</company>
     </publish>
@@ -10,6 +10,6 @@
         <version>1</version>
         <translated>true</translated>
         <datetime>10</datetime>
-        <company>Alesxhiagic Press</company>
+        <company>Alesxhiagic</company>
     </publish>
 </publishs>

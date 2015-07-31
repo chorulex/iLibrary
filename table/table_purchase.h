@@ -57,7 +57,7 @@ namespace iLibrary
 			return true;
 		}
 
-		purchase query(const isbn& book_id)
+		purchase query_isbn(const isbn& book_id)
 		{
 			purchase result;
 

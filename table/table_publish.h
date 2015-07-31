@@ -62,7 +62,7 @@ namespace iLibrary
 			return true;
 		}
 
-		publish query(const isbn& book_id)
+		publish query_isbn(const isbn& book_id)
 		{
 			publish result;
 
@@ -84,7 +84,7 @@ namespace iLibrary
 
 				item = elem->FirstChildElement("translated");
 				if (item != nullptr && !item->NoChildren())
-					result.translated = item->FirstChild()->Value() == "true";
+					result.translated = std::string("true").compare(item->FirstChild()->Value()) == 0;
 
 				item = elem->FirstChildElement("datetime");
 				if (item != nullptr && !item->NoChildren())
@@ -98,6 +98,21 @@ namespace iLibrary
 			}
 
 			return result;
+		}
+
+		std::vector<isbn> query_publisher(const std::string& publisher)
+		{
+			return query_section("publish", "company", publisher);
+		}
+
+		std::vector<isbn> query_translated()
+		{
+			return query_section("publish", "translated", "true");
+		}
+
+		std::vector<isbn> query_not_translated()
+		{
+			return query_section("publish", "translated", "false");
 		}
 	};
 }

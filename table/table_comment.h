@@ -24,7 +24,7 @@ namespace iLibrary
 			_table_name = "database/comment.xml";
 		}
 
-		std::vector<comment> query(const isbn& book_id)
+		std::vector<comment> query_isbn(const isbn& book_id)
 		{
 			std::vector<comment> result;
 

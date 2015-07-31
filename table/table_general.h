@@ -65,44 +65,20 @@ namespace iLibrary
 
 		bool update(const option& _new)
 		{
-			return update(_new.count) && update(_new.name);
+			return update_count(_new.count) && update_name(_new.name);
 		}
 
-		bool update(const std::string& name)
+		bool update_name(const std::string& name)
 		{
-			TiXmlElement* root = _doc->RootElement();
-			if (root == nullptr)
-				return false;
-
-			TiXmlElement* name_node = root->FirstChildElement("name");
-			if (name_node == nullptr)
-				return false;
-
-			if (name_node->NoChildren())
-				name_node->InsertEndChild(TiXmlText(name.c_str()));
-			else
-				name_node->FirstChild()->SetValue(name.c_str());
-			return true;
+			return update_section("general", "name", name);
 		}
 
-		bool update(int count)
+		bool update_count(int count)
 		{
-			TiXmlElement* root = _doc->RootElement();
-			if (root == nullptr)
-				return false;
+			std::stringstream value;
+			value << count;
 
-			TiXmlElement* count_node = root->FirstChildElement("count");
-			if (count_node == nullptr)
-				return false;
-
-			std::stringstream count_str;
-			count_str << count;
-
-			if (count_node->NoChildren())
-				count_node->InsertEndChild(TiXmlText(count_str.str().c_str()));
-			else
-				count_node->FirstChild()->SetValue(count_str.str().c_str());
-			return true;
+			return update_section("general", "count", value.str());
 		}
 	};
 }
