@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <states>
     <state isbn="adf_123_3q341234">
-        <over>true</over>
-        <in_store>true</in_store>
-        <page>0</page>
-        <current>00</current>
-    </state>
-    <state isbn="45f_dfg_3qasdfs4">
-        <over>true</over>
+        <over>false</over>
         <in_store>true</in_store>
         <page>0</page>
         <current>00</current>

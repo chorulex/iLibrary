@@ -131,6 +131,11 @@ namespace iLibrary
 		{
 			return updata_over(book_id, stat.over) && updata_in_store(book_id, stat.in_store) && updata_current_page_read(book_id, stat.current);
 		}
+
+		bool remove(const isbn& book_id)
+		{
+			return remove_item(book_id, "state");
+		}
 	};
 }
 

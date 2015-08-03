@@ -24,6 +24,43 @@ namespace iLibrary
 			_table_name = "database/comment.xml";
 		}
 
+		bool add(const isbn& book_id, const comment& comm)
+		{
+			TiXmlElement* root = _doc->RootElement();
+			if (root == nullptr)
+			{
+				TiXmlNode* node = new TiXmlElement("comments");
+				_doc->LinkEndChild(node);
+			}
+
+			root = _doc->RootElement();
+
+			TiXmlElement item("comment");
+			item.SetAttribute("isbn", book_id.value.c_str());
+
+			TiXmlElement name("name");
+			name.InsertEndChild(TiXmlText(comm.name.c_str()));
+			item.InsertEndChild(name);
+
+			TiXmlElement context("context");
+			context.InsertEndChild(TiXmlText(comm.context.c_str()));
+			item.InsertEndChild(context);
+
+			root->InsertEndChild(item);
+			return true;
+		}
+
+		bool add(const isbn& book_id, const std::vector<comment>& comms)
+		{
+			for (auto iter = begin(comms); iter != end(comms); ++iter)
+			{
+				if (!add(book_id, *iter))
+					return false;
+			}
+
+			return true;
+		}
+
 		std::vector<comment> query_isbn(const isbn& book_id)
 		{
 			std::vector<comment> result;
@@ -31,30 +68,24 @@ namespace iLibrary
 			TiXmlElement* root = _doc->RootElement();
 			if (root == nullptr)
 				return result;
-
-			TiXmlElement* elem = _doc->FirstChildElement("books");
-			for( ; elem != nullptr; elem = elem->NextSiblingElement())
+			
+			for(TiXmlElement* elem = root->FirstChildElement("comment"); elem != nullptr; elem = elem->NextSiblingElement())
 			{
 				TiXmlAttribute* opt = elem->FirstAttribute();
-				if( opt == nullptr )
-					continue;
-				if( opt->Value() != book_id.value )
+				if( opt == nullptr || opt->Value() != book_id.value )
 					continue;
 
-				for(TiXmlElement* item = elem->FirstChildElement("comment"); item != nullptr; item->NextSiblingElement())
-				{
-					comment comm;
+				comment comm;
 
-					TiXmlAttribute* name = elem->FirstAttribute();
-					comm.name = name == nullptr? "unknown": name->Value();
+				TiXmlElement* item = elem->FirstChildElement("name");
+				if (item != nullptr && !item->NoChildren())
+					comm.name = item->FirstChild()->Value();
 
-					if (!item->NoChildren())
-						comm.context = item->FirstChild()->Value();
+				item = elem->FirstChildElement("context");
+				if (item != nullptr && !item->NoChildren())
+					comm.context = item->FirstChild()->Value();
 
-					result.push_back(comm);
-				}
-
-				return result;
+				result.push_back(comm);
 			}
 
 			return result;

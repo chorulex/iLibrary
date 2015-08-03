@@ -122,6 +122,11 @@ namespace iLibrary
 		{
 			return translated ? _publish_table.query_translated() : _publish_table.query_not_translated();
 		}
+
+		bool remove(const isbn& book_id)
+		{
+			return remove_item(book_id, "cip") && _publish_table.remove(book_id);
+		}
 	};
 }
 

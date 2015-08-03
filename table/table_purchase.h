@@ -90,6 +90,11 @@ namespace iLibrary
 
 			return result;
 		}
+
+		bool remove(const isbn& book_id)
+		{
+			return remove_item(book_id, "purchase");
+		}
 	};
 }
 

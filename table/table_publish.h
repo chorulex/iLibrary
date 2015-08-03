@@ -114,6 +114,11 @@ namespace iLibrary
 		{
 			return query_section("publish", "translated", "false");
 		}
+
+		bool remove(const isbn& book_id)
+		{
+			return remove_item(book_id, "publish");
+		}
 	};
 }
 

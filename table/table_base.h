@@ -60,6 +60,40 @@ namespace iLibrary
 		TiXmlDocument* _doc;
 
 	protected:
+		bool remove_item(const isbn& book_id, const std::string& item_name)
+		{
+			TiXmlElement* root = _doc->RootElement();
+			if (root == nullptr)
+				return false;
+
+			/* Could not to remove root node!  */
+			if(item_name.compare(root->Value()) == 0 )
+				return false;
+
+			std::vector<TiXmlNode*> nodes;
+			for (TiXmlElement* elem = root->FirstChildElement(item_name.c_str()); elem != nullptr; elem = elem->NextSiblingElement())
+			{
+				TiXmlAttribute* opt = elem->FirstAttribute();
+				if (opt == nullptr || opt->Value() == nullptr)
+					continue;
+
+				const std::string id(opt->Value());
+				if (id.compare(book_id.value) == 0)
+					nodes.push_back(elem);
+			}
+
+			if (nodes.empty())
+				return false;
+
+			for (auto iter = begin(nodes); iter != end(nodes); ++iter)
+			{
+				if (!root->RemoveChild(*iter))
+					return false;
+			}
+
+			return true;
+		}
+
 		std::vector<isbn> query_section(const std::string& table, const std::string& section, const std::string& value)
 		{
 			std::vector<isbn> result;

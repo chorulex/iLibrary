@@ -95,6 +95,9 @@ namespace iLibrary
 		std::string context;
 		std::string name;
 
+		comment() {}
+		comment(const std::string& new_name, const std::string& new_context) : name(new_name), context(new_context) {}
+
 		void print() override
 		{
 			std::cout <<"Comment: " << "context:" << context << " name:" << name << std::endl;

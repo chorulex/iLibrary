@@ -35,23 +35,17 @@ namespace iLibrary
 
 		return true;
 	}
-
-	/* 根据书名移除书籍，可能删除多本同名的书籍 */
-	bool store::remove(const std::string& title)
-	{
-		return true;
-	}
-
+	
 	/* 根据isbn标识移除书籍 */
 	bool store::remove(const isbn& id)
 	{
-		return true;
+		return _book_table.remove(id);
 	}
 	
 	/* 根据isbn修改书籍评论 */
 	bool store::add_comment(const isbn& id, const comment& comm)
 	{
-		return true;
+		return _book_table.add_comment(id, comm);
 	}
 
 	/* 查询所有书籍 */

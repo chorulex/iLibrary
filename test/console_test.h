@@ -191,6 +191,28 @@ namespace iLibrary
 				std::cout << "Fail to updata in_store!" << std::endl;
 		}
 
+		void test_store_remove_book()
+		{
+			const isbn book_id("45f_dfg_3qasdfs4");
+			iLibrary::store& srv_store = _lib.get_srv_store();
+			if (!srv_store.remove(book_id))
+				std::cout << "Fail to remove book " << book_id.value << " in_store!" << std::endl;
+			else
+				std::cout << "Success to remove book " << book_id.value << " in_store!" << std::endl;
+		}
+
+		void test_store_add_comment()
+		{
+			comment comm("KFX", "This a new comment!");
+			const isbn book_id("45f_dfg_3qasdfs4");
+
+			iLibrary::store& srv_store = _lib.get_srv_store();
+			if (!srv_store.add_comment(book_id, comm))
+				std::cout << "Fail to add comment!" << std::endl;
+			else
+				std::cout << "Success to add comment!" << std::endl;
+		}
+
 	public:
 		int main()
 		{
@@ -223,7 +245,13 @@ namespace iLibrary
 			test_store_query_not_translated();
 			*/
 
-			test_store_update_in_store();
+			//test_store_update_in_store();
+
+			//test_store_add();
+			//test_store_remove_book();
+			test_store_query_all();
+
+			//test_store_add_comment();
 
 			test_destroy();
 			return 0;

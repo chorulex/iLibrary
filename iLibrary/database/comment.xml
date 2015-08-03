@@ -1,1 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<comments>
+    <comment isbn="adf_123_3q341234">
+        <name>KFX</name>
+        <context>This a new comment!</context>
+    </comment>
+</comments>

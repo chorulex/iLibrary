@@ -5,9 +5,4 @@
         <title>C++ primer</title>
         <author>Chorulex</author>
     </cip>
-    <cip isbn="45f_dfg_3qasdfs4">
-        <price>65</price>
-        <title>C++ Inside</title>
-        <author>Chorulex.C.sexet</author>
-    </cip>
 </cips>

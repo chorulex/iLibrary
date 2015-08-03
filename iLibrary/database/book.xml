@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <books>
     <book isbn="adf_123_3q341234">C++ primer</book>
-    <book isbn="45f_dfg_3qasdfs4">C++ Inside</book>
 </books>

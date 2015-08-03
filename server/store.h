@@ -34,6 +34,9 @@ namespace iLibrary
 		/* 添加多本书 */
 		bool add( package& set);
 		
+		/* 增加书籍评论 */
+		bool add_comment(const isbn& book_id, const comment& comm);
+
 		/* 根据isbn查询书籍 */
 		book query_isbn(const isbn& id) noexcept(false);
 
@@ -57,13 +60,6 @@ namespace iLibrary
 
 		/* 查询所有书籍 */
 		package query_all();
-
-
-		/* 根据书名移除书籍，可能删除多本同名的书籍 */
-		bool remove(const std::string& title);
-
-		/* 根据isbn标识移除书籍 */
-		bool remove(const isbn& id);
 				
 		/* 修改阅读状态 */
 		bool update_state(const isbn& id, const state& stat);
@@ -77,8 +73,9 @@ namespace iLibrary
 		/* 修改已阅读页数 */
 		bool updata_current_page_read(const isbn& id, int page);
 
-		/* 添加书籍评论 */
-		bool add_comment(const isbn& id, const comment& comm);
+		/* 根据isbn标识移除书籍 */
+		bool remove(const isbn& id);
+
 	};
 };
 

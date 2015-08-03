@@ -77,14 +77,20 @@ namespace iLibrary
 			isbn->SetAttribute("isbn", item.get_cip().id.value.c_str());
 			isbn->InsertEndChild(TiXmlText(item.get_cip().title.c_str()));
 			root->LinkEndChild(isbn);
-
-			_state_table.add(item.get_cip().id, item.get_state());
-			_purchase_table.add(item.get_cip().id, item.get_purchase());
+			
 			_cip_table.add(item.get_cip());
+			_purchase_table.add(item.get_isbn(), item.get_purchase());
+			_state_table.add(item.get_isbn(), item.get_state());
+			_comment_table.add(item.get_isbn(), item.get_comments());
 
 			return true;
 		}
 		
+		bool add_comment(const isbn& book_id, const comment& comm)
+		{
+			return _comment_table.add(book_id, comm);
+		}
+
 		package query_all()
 		{
 			package result;
@@ -239,15 +245,10 @@ namespace iLibrary
 		{
 			return true;
 		}
-
-		bool remove(const std::string& title)
-		{
-			return true;
-		}
-
+		
 		bool remove(const isbn& id)
 		{
-			return true;
+			return remove_item(id, "book") && _cip_table.remove(id) && _purchase_table.remove(id) && _state_table.remove(id);					
 		}
 	};
 }
