@@ -110,6 +110,9 @@
     <ClCompile Include="..\xml\tinyxmlparser.cpp">
       <Filter>xml</Filter>
     </ClCompile>
+    <ClCompile Include="..\view\manager.cpp">
+      <Filter>view</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\readme.txt" />

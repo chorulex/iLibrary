@@ -7,25 +7,33 @@
 #ifndef _GUI_TEST_H_
 #define _GUI_TEST_H_
 
+#include "../library/library.h"
 #include "../view/manager.h"
 
 namespace iLibrary
 {
-	namespace gui_test
+	class gui_test
 	{
-		int main()
+	public:
+		int main(int argc, char** argv)
 		{
-			// TODO:Use QT GUI LIB
-			/*
-			iLibrary::manager_view _fream;
-			_fream.show();
+			library lib;
+			if (!lib.initialize())
+			{
+				std::cout << "Fail to init library!" << std::endl;
+				return 0;
+			}
 
-			nana::exec();
-			*/
+			Gtk::Main kit(argc, argv);
+			manager_view window(lib);
+			window.init_window();
 
+			kit.run(window);
+
+			lib.destroy();
 			return 0;
 		}
-	}
+	};
 }
 
 #endif

@@ -4,6 +4,9 @@
  * date: 07/23/2015
  */
 
+#ifndef _LIBRARY_ENTERY_H_
+#define _LIBRARY_ENTERY_H_
+
 #include "../server/general.h"
 #include "../server/store.h"
 #include "../book/package.h"
@@ -36,3 +39,5 @@ namespace iLibrary
   };
 
 };
+
+#endif
